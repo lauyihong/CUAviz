@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapbox GeoJSON Example</title>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .select-variable-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 0;
+        opacity: 0.8;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+    }
+
+
+    .info-container {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 30px;
+      background-color: transparent;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    .color-gradient-container {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        padding: 30px;
+        background-color: transparent;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: white;
+        z-index: 1;
+        transform: translateX(-50%);
+    }
+
+    #color-gradient {
+      width: 300px;
+      height: 15px;
+      background-image: linear-gradient(to right, #0000ff, #ff0000);
+      position: relative;
+      margin: 5px auto;
+    }
+
+    .value-label {
+      position: absolute;
+      top: -20px;
+      font-size: 10px;
+    }
+
+    .left {
+      left: 0;
+    }
+
+    .center {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .right {
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="select-variable-container">
+      <div>Selected Variable:</div>
+      <select id="variable-selector">
+        <option value="v_pop">v_pop</option>
+        <option value="v_resi">v_resi</option>
+        <option value="v_activity">v_activity</option>
+        <option value="v_business">v_business</option>
+        <option value="v_facility">v_facility</option>
+        <option value="v_street_quality">v_street_quality</option>
+      </select>
+    </div>
+    <div class="color-gradient-container">
+      <div id="color-gradient">
+        <div class="value-label left">0</div>
+        <div class="value-label center">0.5</div>
+        <div class="value-label right">1</div>
+      </div>
+    </div>
+    <div class="info-container">
+      <div>Mapbox GeoJSON Example - <span id="selected-variable-label"></span></div>
+    </div>
+    
+  <script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoieWlmZW5nYXJjaCIsImEiOiJja3VzcDFtd2U1aG5kMnZuejJuM2JvazFxIn0.IfxcKeWVnyicrXYH1MNwfw';
+    const geoJsonFilePath = '../03_data/after_st_gdf.geojson';
+
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v10',
+      center: [116.383986, 39.906139],
+      zoom: 10,
+      maxBounds: [
+        [116.383986 - 1, 39.906139-1],
+        [116.383986 + 1, 39.906139 + 1]
+        ]
+        });
+
+map.on('load', function () {
+map.addSource('grid-data', {
+type: 'geojson',
+data: geoJsonFilePath
+});
+
+function setSelectedVariable(variable) {
+  document.getElementById('selected-variable-label').textContent = variable;
+  map.setPaintProperty('grid', 'fill-color', [
+    'interpolate',
+    ['linear'],
+    ['get', variable],
+    0, '#0000ff',
+    1, '#ff0000'
+  ]);
+  map.setPaintProperty('grid-labels', 'text-field', ['to-string', ['get', variable]]);
+}
+
+map.addLayer({
+  id: 'grid',
+  type: 'fill',
+  source: 'grid-data',
+  paint: {
+    'fill-opacity': 0.6
+  }
+});
+
+map.addLayer({
+  id: 'grid-outline',
+  type: 'line',
+  source: 'grid-data',
+  paint: {
+    'line-color': 'rgba(255, 255, 255, 0.2)',
+    'line-width': 1
+  }
+});
+
+map.addLayer({
+  id: 'grid-labels',
+  type: 'symbol',
+  source: 'grid-data',
+  minzoom: 15,
+  layout: {
+    'text-field': '',
+    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+    'text-size': 12
+  },
+  paint: {
+    'text-color': 'rgba(255, 255, 255, 0.7)'
+  }
+});
+
+const variableSelector = document.getElementById('variable-selector');
+variableSelector.addEventListener('change', (e) => {
+  setSelectedVariable(e.target.value);
+});
+
+setSelectedVariable(variableSelector.value);
+
+map.on('zoom', () => {
+  if (map.getZoom() > 12) {
+    map.setLayoutProperty('grid-labels', 'visibility', 'visible');
+  } else {
+    map.setLayoutProperty('grid-labels', 'visibility', 'none');
+  }
+});
+
+});
+</script>
+
+</body>
+</html>
+```
