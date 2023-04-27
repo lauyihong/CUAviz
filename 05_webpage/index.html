@@ -87,6 +87,7 @@
     }
   </style>
 </head>
+
 <body>
     <div id="map"></div>
     <div class="select-variable-container">
@@ -127,74 +128,74 @@
         });
 
 map.on('load', function () {
-map.addSource('grid-data', {
+  map.addSource('grid-data', {
 type: 'geojson',
 data: geoJsonFilePath
 });
 
-function setSelectedVariable(variable) {
-  document.getElementById('selected-variable-label').textContent = variable;
-  map.setPaintProperty('grid', 'fill-color', [
-    'interpolate',
-    ['linear'],
-    ['get', variable],
-    0, '#0000ff',
-    1, '#ff0000'
-  ]);
-  map.setPaintProperty('grid-labels', 'text-field', ['to-string', ['get', variable]]);
-}
-
-map.addLayer({
-  id: 'grid',
-  type: 'fill',
-  source: 'grid-data',
-  paint: {
-    'fill-opacity': 0.6
+  function setSelectedVariable(variable) {
+    document.getElementById('selected-variable-label').textContent = variable;
+    map.setPaintProperty('grid', 'fill-color', [
+      'interpolate',
+      ['linear'],
+      ['get', variable],
+      0, '#0000ff',
+      1, '#ff0000'
+    ]);
+    map.setPaintProperty('grid-labels', 'text-field', ['to-string', ['get', variable]]);
   }
-});
 
-map.addLayer({
-  id: 'grid-outline',
-  type: 'line',
-  source: 'grid-data',
-  paint: {
-    'line-color': 'rgba(255, 255, 255, 0.2)',
-    'line-width': 1
-  }
-});
+  map.addLayer({
+    id: 'grid',
+    type: 'fill',
+    source: 'grid-data',
+    paint: {
+      'fill-opacity': 0.6
+    }
+  });
 
-map.addLayer({
-  id: 'grid-labels',
-  type: 'symbol',
-  source: 'grid-data',
-  minzoom: 15,
-  layout: {
-    'text-field': '',
-    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-    'text-size': 12
-  },
-  paint: {
-    'text-color': 'rgba(255, 255, 255, 0.7)'
-  }
-});
+  map.addLayer({
+    id: 'grid-outline',
+    type: 'line',
+    source: 'grid-data',
+    paint: {
+      'line-color': 'rgba(255, 255, 255, 0.2)',
+      'line-width': 1
+    }
+  });
 
-const variableSelector = document.getElementById('variable-selector');
-variableSelector.addEventListener('change', (e) => {
-  setSelectedVariable(e.target.value);
-});
+  map.addLayer({
+    id: 'grid-labels',
+    type: 'symbol',
+    source: 'grid-data',
+    minzoom: 15,
+    layout: {
+      'text-field': '',
+      'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+      'text-size': 12
+    },
+    paint: {
+      'text-color': 'rgba(255, 255, 255, 0.7)'
+    }
+  });
 
-setSelectedVariable(variableSelector.value);
+  const variableSelector = document.getElementById('variable-selector');
+  variableSelector.addEventListener('change', (e) => {
+    setSelectedVariable(e.target.value);
+  });
 
-map.on('zoom', () => {
-  if (map.getZoom() > 12) {
-    map.setLayoutProperty('grid-labels', 'visibility', 'visible');
-  } else {
-    map.setLayoutProperty('grid-labels', 'visibility', 'none');
-  }
-});
+  setSelectedVariable(variableSelector.value);
 
-});
-</script>
+  map.on('zoom', () => {
+      if (map.getZoom() > 12) {
+        map.setLayoutProperty('grid-labels', 'visibility', 'visible');
+      } else {
+        map.setLayoutProperty('grid-labels', 'visibility', 'none');
+      }
+      });
+
+  }); 
+  </script>
 
 </body>
 </html>
