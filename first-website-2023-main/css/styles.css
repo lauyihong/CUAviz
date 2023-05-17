@@ -1,0 +1,38 @@
+html, body, #container {
+    background-color: #de9b60;
+    font-family: sans-serif;
+    width: 100%;
+    display: flex;
+  }
+  
+  .artist-album-tile {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .artist-album-tile:hover {
+    cursor: pointer;
+    background-color: #309552;
+  }
+  
+  .artist-name {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .column {
+    margin: 0;
+    flex: 1 0 50%;
+    box-sizing: border-box;
+  }
+  
+  #right {
+    padding: 8px;
+  }
+  
+  #right img {
+    width: 100%;
+  }
+  
