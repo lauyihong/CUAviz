@@ -6,8 +6,6 @@
 
 
 
-
-
 # 工作日志
 
 - [x] 创建文件
@@ -24,19 +22,19 @@
 
 
 
-- [x] refresh bottom debug
+- [x] refresh bottom debug Jul 24 yifeng
 
 
 
-- [ ] 添加高度信息
+- [x] 添加高度信息
 
-  - [ ] 添加高度信息
+  - [x] 添加高度信息
 
   - [x] 边线换色（无边线） Jul24 Yifeng
 
-  - [ ] 添加三维视图转换
+  - [x] 添加三维视图转换
 
-  - [ ] reset bug修复
+  - [x] reset bug修复
 
     目前只重置缩放比和位置，不重置视角
 
