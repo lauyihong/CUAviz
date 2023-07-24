@@ -297,6 +297,8 @@
   }); 
 
 
+    document.getElementById('info').style.display = 'none'; // 默认隐藏详细信息框
+
     map.on('click', 'grid', function (e) {
       var properties = e.features[0].properties;
       // Here, we're creating a new string that contains the HTML
@@ -306,9 +308,15 @@
       for (var property in properties) {
         infoHTML += '<p><strong>' + property + ':</strong> ' + properties[property] + '</p>';
       }
+
+      document.getElementById('info').style.display = 'block';
       document.getElementById('info').innerHTML = infoHTML;
     });
 
+    // 点击框时隐藏详细信息
+    document.getElementById('info').addEventListener('click', () => {
+      document.getElementById('info').style.display = 'none';
+    });
 
 
     document.getElementById('reset-button').addEventListener('click', () => {
@@ -345,7 +353,6 @@
       }
 
     });
-
 
 
 
