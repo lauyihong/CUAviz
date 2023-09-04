@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 646.38 594.38">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-4 {
+        stroke-width: 2px;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2, .cls-5 {
+        stroke-width: 5px;
+      }
+
+      .cls-5 {
+        font-family: Avenir-MediumOblique, Avenir;
+        font-size: 50px;
+        font-style: oblique;
+        font-weight: 500;
+        letter-spacing: .08em;
+      }
+    </style>
+  </defs>
+  <text class="cls-5" transform="translate(167.14 258.57)"><tspan x="0" y="0">FUTURE URBAN </tspan><tspan x="0" y="57">AI STUDIO</tspan></text>
+  <g>
+    <path class="cls-2" d="m66.45,335.06c3.01.38,6.08.57,9.2.57,40.4,0,73.15-32.75,73.15-73.15,0-32.39-21.06-59.87-50.23-69.49"/>
+    <path class="cls-2" d="m87.22,190.25c-3.77-.6-7.63-.91-11.57-.91-40.4,0-73.15,32.75-73.15,73.15,0,32.58,21.29,60.18,50.72,69.65"/>
+    <polyline class="cls-4" points="112.74 200.73 112.74 249.3 96.02 266.02 71.84 266.02"/>
+    <path class="cls-4" d="m141.21,233.37c-4.43,0-8.85,0-13.28,0v.77s0,25.45,0,25.45"/>
+    <polyline class="cls-4" points="27.82 208.68 60.91 241.78 60.91 285.13 99.67 285.13"/>
+    <polyline class="cls-4" points="66.44 191.07 66.44 217.02 78.13 228.71"/>
+    <line class="cls-4" x1="66.16" y1="216.92" x2="49.6" y2="230.47"/>
+    <polyline class="cls-4" points="18.16 219.48 48.64 249.96 48.64 286.87 25.53 288.24 25.53 272.28 4.24 272.28"/>
+    <polyline class="cls-4" points="104.22 257.54 115.15 268.46 115.15 298.44 127.93 311.22"/>
+    <path class="cls-4" d="m94.51,331.74l-15.26-15.26h-20.19c0-6.34-.29-12.56-.29-18.89h32.38s13.51,13.51,13.51,13.51"/>
+    <polyline class="cls-4" points="112.17 220.04 94.53 220.04 94.53 243.93"/>
+    <line class="cls-4" x1="39.46" y1="306.96" x2="58.49" y2="306.96"/>
+    <line class="cls-4" x1="36.8" y1="237.09" x2="20.25" y2="253.63"/>
+    <line class="cls-4" x1="115.58" y1="282.52" x2="130.13" y2="282.52"/>
+    <circle class="cls-3" cx="78.38" cy="229.13" r="2.25"/>
+    <circle class="cls-3" cx="20.05" cy="253.86" r="2.25"/>
+    <circle class="cls-3" cx="94.53" cy="243.11" r="2.25"/>
+    <circle class="cls-3" cx="127.93" cy="259.59" r="2.25"/>
+    <circle class="cls-3" cx="71.84" cy="266.02" r="2.25"/>
+    <circle class="cls-3" cx="99.67" cy="285.13" r="2.25"/>
+    <circle class="cls-3" cx="130.13" cy="282.52" r="2.25"/>
+    <circle class="cls-3" cx="104.66" cy="311.09" r="2.25"/>
+    <circle class="cls-3" cx="39.46" cy="306.96" r="2.25"/>
+    <circle class="cls-1" cx="97.43" cy="193" r="5.99"/>
+    <circle class="cls-1" cx="54.03" cy="332.13" r="5.99"/>
+  </g>
+</svg>

@@ -17,6 +17,18 @@
       padding: 0;
     }
 
+    #logo-container {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        z-index: 2;
+    }
+
+    #logo-container img {
+        width: 120px;  /* 你可以根据需要调整这个大小 */
+        height: auto;
+    }
+
     #map {
       position: absolute;
       top: 0;
@@ -136,6 +148,10 @@
 
 <body>
     <div id="map"></div>
+
+    <div id="logo-container">
+        <img src="./01_workbin/Studio Logo-Final white.svg" alt="Studio Logo">
+    </div>
 
     <div class="button-container">
       <button id="reset-button">Reset</button>
