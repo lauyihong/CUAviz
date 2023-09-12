@@ -12,20 +12,26 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
+    :root {
+    --black-bar-height: 50px;
+    }
     body {
       margin: 0;
       padding: 0;
     }
 
+    #intro-container p {
+    line-height: 1.5; 
+    }
     #logo-container {
         position: absolute;
-        bottom: 10px;
+        top: -30px;
         left: 10px;
         z-index: 2;
     }
 
     #logo-container img {
-        width: 120px;  /* 你可以根据需要调整这个大小 */
+        width: 135px;
         height: auto;
     }
 
@@ -36,9 +42,26 @@
       width: 100%;
     }
 
+    .black-bar {
+        background-color: rgba(0, 0, 0, 0.8);  /* Adjusted to 80% opacity */
+        height: var(--black-bar-height); /* You can adjust this value as needed */
+        width: 100%;
+        position: absolute;
+        z-index: 2;      
+        padding-left: 10px;       
+        color: white;  /* Ensuring text color is white for visibility */
+    }
+
+    .top-bar {
+        top: 0;
+    }
+    .bottom-bar {
+        bottom: 0;
+    }
+    
     .button-container {
       position: absolute;
-      top: 10px;
+      top: calc(10px + var(--black-bar-height));
       right: 10px;
       display: flex;
       flex-direction: row;
@@ -60,10 +83,9 @@
       background-color: #eee;
     }
 
-
     .select-variable-container {
         position: absolute;
-        top: 45px;
+        top: calc(35px + var(--black-bar-height));
         right: 10px;
         padding: 10px;
         background-color: transparent;
@@ -92,7 +114,7 @@
 
     .info-container {
       position: absolute;
-      bottom: 10px;
+      bottom: calc(-15px + var(--black-bar-height));
       left: 50%;
       transform: translateX(-50%);
       padding: 30px;
@@ -103,7 +125,7 @@
     }
     .color-gradient-container {
         position: absolute;
-        bottom: 30px;
+        bottom: calc(5px + var(--black-bar-height));
         left: 50%;
         padding: 30px;
         background-color: transparent;
@@ -145,48 +167,88 @@
 
 </head>
 
-
 <body>
-    <div id="map"></div>
 
-    <div id="logo-container">
-        <img src="./01_workbin/Studio Logo-Final white.svg" alt="Studio Logo">
+    <div class="black-bar top-bar">
+
+        <h2>Do Vibrant Places Promote Active Living?</h2>
+
     </div>
 
-    <div class="button-container">
-      <button id="reset-button">Reset</button>
-      <button id="3d-button">
-        <span style="color: rgba(0, 0, 0, 0.9);">2D</span>/<span style="color: rgba(255,255,255,0.9);">3D</span>
-      </button>
+    <div class="content">
+
+      <div id="map">
+        
+      </div>
+
+      <div class="button-container">
+        <button id="reset-button">Reset</button>
+        <button id="3d-button">
+          <span style="color: rgba(0, 0, 0, 0.9);">2D</span>/<span style="color: rgba(255,255,255,0.9);">3D</span>
+        </button>
+      </div>
+      
+      <div class="select-variable-container">
+        <div>Selected Variable:</div>
+        <ul id="variable-list">
+          <li data-variable="v_pop">Population</li>
+          <li data-variable="v_resi">Residential</li>
+          <li data-variable="v_activity">Activity</li>
+          <li data-variable="v_business">Business</li>
+          <li data-variable="v_facility">Facility</li>
+          <li data-variable="v_street_quality">Street Quality</li>
+        </ul>
+      </div>    
+
+      <div class="color-gradient-container">
+        <div id="color-gradient">
+          <div class="value-label left">0</div>
+          <div class="value-label center">0.5</div>
+          <div class="value-label right">1</div>
+        </div>
+      </div>
+
+      <div class="info-container">
+        <div>Mapbox GeoJSON demo - <span id="selected-variable-label"></span></div>
+      </div>
+
+      <div id="info" style="position: absolute; bottom: 0; right: 0; margin: 30px; padding: 20px; background: rgba(255,255,255,0.8); z-index: 1;">
+      </div>
+
+      <!-- Phase one content -->
+      <div id="intro-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: black; padding: 20px; z-index: 3; color: white;">
+            <!-- Logo at the top right corner -->
+          <div id="logo-container" style="position: absolute; top: -15px; left: 600px;">
+              <!-- Insert your logo image here -->
+              <img src="./01_workbin/Studio Logo-Final white.svg" alt="Your Logo" style="height: 150px;">
+          </div>
+
+          <!-- Title and Logo -->
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2>Do Vibrant Places Promote Active Living?</h2>
+          </div>
+
+          <!-- Content -->
+          <p>Although extensive research has investigated urban vibrancy as a critical indicator for spatial planning, urban design, and economic development, the unclear relationship between local vibrancy and active living needs to be clarified and requires more in-depth analysis. This study localizes urban vibrancy at both hyper-local and neighborhood scales by integrating high-resolution, large-scale, and heterogeneous urban datasets and analyzing interactions among variables representing vibrancy’s environmental, economic, and social aspects. We utilize publicly available urban open data, Points of Interest requested from API, and leisure running trajectories acquired through data mining to investigate the spatial distribution of various vibrancy indicators and how they interact with physical activity at the local scale. Based on these variables, we then construct linear regression models and Geographically Weighted Regression (GWR) models to test and estimate how local vibrancy and physical activity relate to residential real estate characteristics. The results reveal the strong impact of urban form on local vibrancy but not physical activeness. At the neighborhood level, all vibrancy factors are statistically significant to local residential real estate prices but with different interactions based on location. Our study highlights the importance of accounting for locality and different physical, environmental, social, and economic factors when analyzing and interpreting urban vibrancy at a granular scale within a city.</p>
+
+          <button id="start-explore">Start to Explore</button>
+      </div>
+
+      <!-- 第二阶段的内容 -->
+      <div id="text-container" style="position: absolute; top: 50%; left: 10%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9); padding: 20px; z-index: 3; display: none;">
+          <p>yeyeye</p>
+          <button id="continue">Continue</button>
+      </div>
+
     </div>
     
-    <div class="select-variable-container">
-      <div>Selected Variable:</div>
-      <ul id="variable-list">
-        <li data-variable="v_pop">Population</li>
-        <li data-variable="v_resi">Residential</li>
-        <li data-variable="v_activity">Activity</li>
-        <li data-variable="v_business">Business</li>
-        <li data-variable="v_facility">Facility</li>
-        <li data-variable="v_street_quality">Street Quality</li>
-      </ul>
-    </div>    
-
-    <div class="color-gradient-container">
-      <div id="color-gradient">
-        <div class="value-label left">0</div>
-        <div class="value-label center">0.5</div>
-        <div class="value-label right">1</div>
+    <div class="black-bar bottom-bar">
+      <div id="logo-container">
+        <a href="http://urbanintelligence.tech/eng.html">
+          <img src="./01_workbin/Studio Logo-Final white.svg" alt="Studio Logo">
+        </a>
       </div>
     </div>
-    <div class="info-container">
-      <div>Mapbox GeoJSON demo - <span id="selected-variable-label"></span></div>
-    </div>
-
-    <div id="info" style="position: absolute; bottom: 0; right: 0; margin: 30px; padding: 20px; background: rgba(255,255,255,0.8); z-index: 1;"></div>
-
-
-    <!--        ——————————————————————————     -->
 
   <script>
     // Define global variables start_zoom and start_center
@@ -194,7 +256,7 @@
     let is3D = false;
     let selectedVariable = 'v_pop';  // add：Global variable to track the selectedVariable
 
-    const start_zoom = 9;
+    const start_zoom = 10;
     const start_center = [116.383986, 39.906139];
     const start_pitch = 0
 
@@ -262,56 +324,52 @@
 
     }
 
-  map.on('load', function () {
+    map.on('load', function () {
       map.addSource('grid-data', {
         type: 'geojson',
         data: geoJsonFilePath
       });
 
+      map.addLayer({
+        id: 'grid',
+        type: 'fill-extrusion',
+        source: 'grid-data',
+        paint: {
+          'fill-extrusion-opacity': 0.6
+        }
+      });
 
+      map.addLayer({
+        id: 'grid-highlight',
+        type: 'line',
+        source: 'grid-data',
+        paint: {
+          'line-color': 'rgba(255, 255, 255, 0.5)',
+          'line-width': 2
+        },
+        filter: ['==', 'id', '']
+      }); 
 
-    map.addLayer({
-      id: 'grid',
-      type: 'fill-extrusion',
-      source: 'grid-data',
-      paint: {
-        'fill-extrusion-opacity': 0.6
-      }
-    });
+      map.addLayer({
+        id: 'grid-outline',
+        type: 'line',
+        source: 'grid-data',
+        paint: {
+          'line-color': 'rgba(255, 255, 255, 0)',
+          'line-width': 1
+        }
+      });
 
-    map.addLayer({
-      id: 'grid-highlight',
-      type: 'line',
-      source: 'grid-data',
-      paint: {
-        'line-color': 'rgba(255, 255, 255, 0.5)',
-        'line-width': 2
-      },
-      filter: ['==', 'id', '']
-    });    
+      const variableList = document.getElementById('variable-list');
+      variableList.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+          selectedVariable = e.target.dataset.variable;
+          setSelectedVariable(selectedVariable);
+        }
+      });
 
-    map.addLayer({
-      id: 'grid-outline',
-      type: 'line',
-      source: 'grid-data',
-      paint: {
-        'line-color': 'rgba(255, 255, 255, 0)',
-        'line-width': 1
-      }
-    });
-
-    const variableList = document.getElementById('variable-list');
-    variableList.addEventListener('click', (e) => {
-      if (e.target.tagName === 'LI') {
-        selectedVariable = e.target.dataset.variable;
-        setSelectedVariable(selectedVariable);
-      }
-    });
-
-    setSelectedVariable('v_pop');
-
-  }); 
-
+      setSelectedVariable('v_pop');
+    }); 
 
     document.getElementById('info').style.display = 'none'; // 默认隐藏详细信息框
 
@@ -334,7 +392,6 @@
       document.getElementById('info').style.display = 'none';
     });
 
-
     document.getElementById('reset-button').addEventListener('click', () => {
       let start_pitch = is3D ? 60 : 0;
       map.flyTo({
@@ -345,7 +402,7 @@
         essential: true
       });
     });
-    
+
     document.getElementById('3d-button').addEventListener('click', () => {
       console.log('refresh button is clicked');
       is3D = !is3D;  // Flip the value of is3D
@@ -353,7 +410,7 @@
       setSelectedVariable(selectedVariable); 
 
       let start_pitch = is3D ? 60 : 0;
- 
+
       map.flyTo({
         pitch: start_pitch,
         essential: true
@@ -370,11 +427,31 @@
 
     });
 
+    // 第一阶段的按钮点击事件
+    document.getElementById('start-explore').addEventListener('click', function() {
+        const introContainer = document.getElementById('intro-container');
 
+        setTimeout(() => {
+            introContainer.style.display = 'none';
 
+            // 显示第二阶段的内容
+            document.getElementById('text-container').style.display = 'block';
+        }, 1000);
+    });
+
+    // 第二阶段的按钮点击事件
+    document.getElementById('continue').addEventListener('click', function() {
+        const textContainer = document.getElementById('text-container');
+
+        setTimeout(() => {
+            textContainer.style.display = 'none';
+
+            // 进入第三阶段，即点击3D按钮的效果
+            // 模拟点击3D按钮
+            document.getElementById('3d-button').click();
+        }, 1000);
+    });
   </script>
-
-  <!--        ——————————————————————————     -->
 
 </body>
 </html>
